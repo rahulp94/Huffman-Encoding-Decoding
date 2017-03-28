@@ -72,12 +72,12 @@ public class BinaryHeap{
 		return bNew;
 	}
 	
-	public void BinaryHeapImplementation(int[] hm){
+	public void BinaryHeapImplementation(int[] arr){
 		ArrayList<BSTNode> al = new ArrayList<BSTNode>();
 		BSTNode b1,b2,b;
-		for (int i =0;i<hm.length;i++) {
-			if(hm[i]!=0){
-				al.add(new BSTNode(hm[i],i)); 
+		for (int i =0;i<arr.length;i++) {
+			if(arr[i]!=0){
+				al.add(new BSTNode(arr[i],i)); 
 			}
 		}
 		
@@ -106,6 +106,31 @@ public class BinaryHeap{
 					System.out.println("Frequency value: " + temp.data);
 					if(temp.left != null) q.add(temp.left);
 					if(temp.right != null) q.add(temp.right);
+				}
+				else 
+					throw new Exception("No record found");
+				i++;
+			}
+			System.out.println();
+		}
+	}
+	
+	public void printLevelOrder(PairingNode root) throws Exception {
+		
+		Queue<PairingNode> q = new LinkedList<PairingNode>();
+		q.add(root);
+		PairingNode temp;
+		int len;
+		
+		while(!q.isEmpty()){
+			len = q.size();
+			int i=0;
+			while(i<len){
+				temp = q.poll();
+				if(temp!=null){
+					System.out.println("Frequency value: " + temp.data);
+					if(temp.left != null) q.add(temp.left);
+					if(temp.nextSibling != null) q.add(temp.nextSibling);
 				}
 				else 
 					throw new Exception("No record found");

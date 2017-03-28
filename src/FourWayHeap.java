@@ -93,7 +93,7 @@ public class FourWayHeap{
 	}
 	
 	
-	public void FourWayHeapImplementation(int[] hm){
+	public void FourWayHeapImplementation(int[] arr){
 		
 		ArrayList<BSTNode> al = new ArrayList<BSTNode>();
 		//Adding leading zeros to the array list
@@ -102,9 +102,9 @@ public class FourWayHeap{
 		al.add(null);
 
 		BSTNode b1,b2,b;
-		for (int i =0;i<hm.length;i++) {
-			if(hm[i]!=0){
-				al.add(new BSTNode(hm[i],i)); 
+		for (int i =0;i<arr.length;i++) {
+			if(arr[i]!=0){
+				al.add(new BSTNode(arr[i],i)); 
 			}
 		}
 		

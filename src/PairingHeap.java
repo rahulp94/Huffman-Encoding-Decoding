@@ -53,6 +53,7 @@ public class PairingHeap{
 		}
 	}
 	
+	/*
 	public PairingNode mergeHeap(PairingNode node){
 		if(node == null || node.nextSibling == null) return node;
 		
@@ -69,9 +70,45 @@ public class PairingHeap{
 		}
 		
 	}
+	*/
 	
-	public PairingNode deleteMin(PairingNode node){
-		return mergeHeap(node.left);
+	public void deleteMin(){
+		int size = root.plChildren.size();
+		if(size == 0) root = null;
+		else if(size == 1) root = root.plChildren.get(0);
+		else if(size == 2){
+			if(root.plChildren.get(0).data < root.plChildren.get(1).data){
+				root = root.plChildren.get(0);
+				root.plChildren.add(root.plChildren.get(1));
+			}
+			else{
+				root = root.plChildren.get(1);
+				root.plChildren.add(root.plChildren.get(0));
+			}
+			
+		}
+		else if(size>2){
+			ArrayList<PairingNode> temp = new ArrayList<PairingNode>();
+			PairingNode p1,p2;
+			int cnt=0;
+			while(cnt<size){
+				p1 = root.plChildren.get(0);
+				p2 = root.plChildren.get(1);
+				root.plChildren.remove(0);
+				cnt++;
+				if(cnt != size){
+					root.plChildren.remove(0);
+					cnt++;
+					meldNode(p1,p2);
+				}
+				else if(cnt == size) root.plChildren.add(p1);
+			}
+			temp = root.plChildren;
+			root = temp.get(0);
+			for(int i =1; i<temp.size();i++){
+				pairingInsert(temp.get(i));
+			}
+		}
 	}
 	
 	public PairingNode combine(PairingNode temp1, PairingNode temp2) {
@@ -81,17 +118,17 @@ public class PairingHeap{
 		return newNode;
 	}
 	
-	public void PairingHeapImplementation(int[] hm) {
-		//BinaryHeap object = new BinaryHeap();
+	public void PairingHeapImplementation(int[] arr) {
+		//BinaryHeap obj = new BinaryHeap();
 		PairingNode t1, t2, tc;
 		int flag = 1;
-		for (int i = 0; i < hm.length; i++) {
-			if (hm[i] != 0) {
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] != 0) {
 				if (flag == 1) {
-					root = new PairingNode(hm[i]);
+					root = new PairingNode(arr[i]);
 					flag = 0;
 				} else {
-					PairingNode temp = new PairingNode(hm[i]);
+					PairingNode temp = new PairingNode(arr[i]);
 					pairingInsert(temp);
 				}
 			}
@@ -99,9 +136,9 @@ public class PairingHeap{
 
 		while (root.plChildren.size() != 0) {
 			t1 = root;
-			deleteMin(t1);
+			deleteMin();
 			t2 = root;
-			deleteMin(t2);
+			deleteMin();
 			tc = combine(t1, t2);
 			pairingInsert(tc);
 		}
