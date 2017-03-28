@@ -7,25 +7,7 @@ import java.util.Queue;
 public class FourWayHeap{
 	
 	ArrayList<BSTNode> al = new ArrayList<BSTNode>();
-	
-	public void usingFourWayHeap(int[] hm){
-		ArrayList<BSTNode> al = new ArrayList<BSTNode>();
-		BSTNode b1,b2,b;
-		for (int i =0;i<hm.length;i++) {
-			if(hm[i]!=0){
-				al.add(new BSTNode(hm[i],i)); 
-			}
-		}
-		
-		buildMinHeap(al);
-		while(al.size()!=1){
-			b1 = removeMin(al);
-			b2 = removeMin(al);
-			b = nodeCombine(b1,b2);
-			minHeapInsert(al,b);
-		}
-	}
-	
+
 	public int firstChild(int i){
 	int first_child = 4*i+1;
 	return first_child;
@@ -34,17 +16,17 @@ public class FourWayHeap{
 	public int secondChild(int i){
 		int second_child = 4*i+2;
 		return second_child;
-		}
+	}
 	
 	public int thirdChild(int i){
 		int third_child = 4*i+3;
 		return third_child;
-		}
+	}
 	
 	public int fourthChild(int i){
 		int fourth_child = 4*i+4;
 		return fourth_child;
-		}
+	}
 	
 	public void minHeapify(ArrayList<BSTNode> a,int i){
 		int smallest;
@@ -63,9 +45,11 @@ public class FourWayHeap{
 		if(second<len && a.get(second).data <= a.get(smallest).data){
 			smallest = second;
 		}
+		
 		if(third<len && a.get(third).data <= a.get(smallest).data){
 			smallest = third;
 		}
+		
 		if(fourth<len && a.get(fourth).data <= a.get(smallest).data){
 			smallest = fourth;
 		}
@@ -107,8 +91,33 @@ public class FourWayHeap{
 		bNew.right = b2;
 		return bNew;
 	}
+	
+	
+	public void FourWayHeapImplementation(int[] hm){
+		
+		ArrayList<BSTNode> al = new ArrayList<BSTNode>();
+		//Adding leading zeros to the array list
+		al.add(null);
+		al.add(null);
+		al.add(null);
 
-	public void printLevelOrder(BSTNode root) throws Exception {
+		BSTNode b1,b2,b;
+		for (int i =0;i<hm.length;i++) {
+			if(hm[i]!=0){
+				al.add(new BSTNode(hm[i],i)); 
+			}
+		}
+		
+		buildMinHeap(al);
+		while(al.size()!=1){
+			b1 = removeMin(al);
+			b2 = removeMin(al);
+			b = nodeCombine(b1,b2);
+			minHeapInsert(al,b);
+		}
+	}
+	
+public void printLevelOrder(BSTNode root) throws Exception {
 		
 		Queue<BSTNode> q = new LinkedList<BSTNode>();
 		q.add(root);
@@ -122,8 +131,8 @@ public class FourWayHeap{
 				temp = q.poll();
 				if(temp!=null){
 					System.out.println("Frequency value: " + temp.data);
-					q.add(temp.left);
-					q.add(temp.right);
+					if(temp.left != null) q.add(temp.left);
+					if(temp.right != null) q.add(temp.right);
 				}
 				else 
 					throw new Exception("No record found");
@@ -132,4 +141,5 @@ public class FourWayHeap{
 			System.out.println();
 		}
 	}
+
 }

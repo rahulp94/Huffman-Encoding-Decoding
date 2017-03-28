@@ -8,24 +8,6 @@ public class BinaryHeap{
 	
 	ArrayList<BSTNode> al = new ArrayList<BSTNode>();
 	
-	public void usingBinaryHeap(int[] hm){
-		ArrayList<BSTNode> al = new ArrayList<BSTNode>();
-		BSTNode b1,b2,b;
-		for (int i =0;i<hm.length;i++) {
-			if(hm[i]!=0){
-				al.add(new BSTNode(hm[i],i)); 
-			}
-		}
-		
-		buildMinHeap(al);
-		while(al.size()!=1){
-			b1 = removeMin(al);
-			b2 = removeMin(al);
-			b = nodeCombine(b1,b2);
-			minHeapInsert(al,b);
-		}
-	}
-	
 	public int leftChild(int i){
 	int left_child = 2*i+1;
 	return left_child;
@@ -89,7 +71,25 @@ public class BinaryHeap{
 		bNew.right = b2;
 		return bNew;
 	}
-
+	
+	public void BinaryHeapImplementation(int[] hm){
+		ArrayList<BSTNode> al = new ArrayList<BSTNode>();
+		BSTNode b1,b2,b;
+		for (int i =0;i<hm.length;i++) {
+			if(hm[i]!=0){
+				al.add(new BSTNode(hm[i],i)); 
+			}
+		}
+		
+		buildMinHeap(al);
+		while(al.size()!=1){
+			b1 = removeMin(al);
+			b2 = removeMin(al);
+			b = nodeCombine(b1,b2);
+			minHeapInsert(al,b);
+		}
+	}
+	
 	public void printLevelOrder(BSTNode root) throws Exception {
 		
 		Queue<BSTNode> q = new LinkedList<BSTNode>();
@@ -104,8 +104,8 @@ public class BinaryHeap{
 				temp = q.poll();
 				if(temp!=null){
 					System.out.println("Frequency value: " + temp.data);
-					q.add(temp.left);
-					q.add(temp.right);
+					if(temp.left != null) q.add(temp.left);
+					if(temp.right != null) q.add(temp.right);
 				}
 				else 
 					throw new Exception("No record found");

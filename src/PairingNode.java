@@ -2,11 +2,24 @@ import java.util.ArrayList;
 
 public class PairingNode{
 	
-	int data;
-	PairingNode left = null;
-	PairingNode right = null;
-	 public PairingNode(int val){
-		 data = val;
+	public int data;
+	public int element;
+	PairingNode left;
+	PairingNode nextSibling;
+	ArrayList<PairingNode> plChildren = new ArrayList<PairingNode>();
+	
+	public PairingNode(int data){
+		 this.data = data;
+		 element = -1;
+		 left = null;
+		 nextSibling = null;
 	 }
-	 ArrayList<PairingNode> pairingList = new ArrayList<PairingNode>();
+	 
+	public PairingNode(int element,int data){
+		this.data = data;
+		this.element = element;
+		left = null;
+		nextSibling = null;
+	} 
+	
 }
