@@ -1,24 +1,21 @@
 public class BSTNode{
-	public BSTNode left;
-	public BSTNode right;
+	public BSTNode left = null;
+	public BSTNode right = null;
 	public int data;
 	public int huff;
 	
 	//Constructors
 	public BSTNode(int n){
-		left = null;
-		right = null;
+		
 		data = n;
 		huff = -1;
 	}
 	
-	public BSTNode(int n, int str){
-		left = null;
-		right = null;
+	public BSTNode(int n, int k){
 		data = n;
-		huff = str;
+		huff = k;
 	}
-
+/*
 	public BSTNode getLeft() {
 		return left;
 	}
@@ -42,5 +39,5 @@ public class BSTNode{
 	public void setData(int data) {
 		this.data = data;
 	}
-	
+*/	
 }

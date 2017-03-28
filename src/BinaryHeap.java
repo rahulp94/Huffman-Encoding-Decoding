@@ -9,12 +9,12 @@ public class BinaryHeap{
 	ArrayList<BSTNode> al = new ArrayList<BSTNode>();
 	
 	public int leftChild(int i){
-	int left_child = 2*i+1;
+	int left_child = (2*i)+1;
 	return left_child;
 	}
 	
 	public int rightChild(int i){
-		int right_child = 2*i+2;
+		int right_child = (2*i)+2;
 		return right_child;
 		}
 	
@@ -23,14 +23,16 @@ public class BinaryHeap{
 		int l = leftChild(i);
 		int r = rightChild(i);
 		int len = a.size();
-		if(l<len && a.get(l).data <= a.get(i).data){
+		if(l<len && (a.get(l).data <= a.get(i).data)){
+			
 			smallest = l;
 		}
 		else{
 			smallest = i;
 		}
+		//System.out.println(r + " " + len + " " + smallest);
 		
-		if(r<len && a.get(r).data <= a.get(smallest).data){
+		if(r<len && (a.get(r).data < a.get(smallest).data)){
 			smallest = r;
 		}
 		
@@ -42,7 +44,7 @@ public class BinaryHeap{
 	
 	public void buildMinHeap(ArrayList<BSTNode> a){
 		int len = a.size();
-		for(int i = (len/2)-1;i>=0; i++){
+		for(int i = (len/2)-1;i>=0; i--){
 			minHeapify(a, i);
 		}
 	}
@@ -89,7 +91,7 @@ public class BinaryHeap{
 			minHeapInsert(al,b);
 		}
 	}
-	
+	/*
 	public void printLevelOrder(BSTNode root) throws Exception {
 		
 		Queue<BSTNode> q = new LinkedList<BSTNode>();
@@ -139,4 +141,5 @@ public class BinaryHeap{
 			System.out.println();
 		}
 	}
+	*/
 }

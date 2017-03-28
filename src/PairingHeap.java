@@ -2,18 +2,15 @@ import java.util.ArrayList;
 
 public class PairingHeap{
 	
-	public ArrayList<PairingNode> plChildren = new ArrayList<PairingNode>();
 	public PairingNode root = null;
  	
 	//Constructor
 	public PairingHeap(){
 		this.root = null;
-		this.plChildren = new ArrayList<>();
 	}
 	
 	public PairingHeap(PairingNode p){
 		this.root = p;
-		this.plChildren = new ArrayList<>();
 	}
 
 	public PairingNode getRoot() {
@@ -38,8 +35,8 @@ public class PairingHeap{
 	}
 	
 	public PairingNode meldNode(PairingNode p1, PairingNode p2){
-		if(p1 == null) return p2;
-		if(p2 == null) return p1;
+		//if(p1 == null) return p2;
+		//if(p2 == null) return p1;
 		
 		if(p1.data<p2.data){
 			p1.plChildren.add(p2);
@@ -74,16 +71,19 @@ public class PairingHeap{
 	
 	public void deleteMin(){
 		int size = root.plChildren.size();
+		PairingNode node;
 		if(size == 0) root = null;
 		else if(size == 1) root = root.plChildren.get(0);
 		else if(size == 2){
 			if(root.plChildren.get(0).data < root.plChildren.get(1).data){
 				root = root.plChildren.get(0);
-				root.plChildren.add(root.plChildren.get(1));
+				node = root.plChildren.get(1);
+				root.plChildren.add(node);
 			}
 			else{
+				node = root.plChildren.get(0);
 				root = root.plChildren.get(1);
-				root.plChildren.add(root.plChildren.get(0));
+				root.plChildren.add(node);
 			}
 			
 		}
@@ -134,7 +134,7 @@ public class PairingHeap{
 			}
 		}
 
-		while (root.plChildren.size() != 0) {
+		while (root.plChildren.size() != 1) {
 			t1 = root;
 			deleteMin();
 			t2 = root;
@@ -142,14 +142,5 @@ public class PairingHeap{
 			tc = combine(t1, t2);
 			pairingInsert(tc);
 		}
-	}
-	public void insert(PairingNode temp) {
-		if (root == null)
-			root = temp;
-		else if (temp.data <= root.data) {
-			temp.plChildren.add(root);
-			root = temp;
-		} else
-			root.plChildren.add(temp);
 	}
 }
